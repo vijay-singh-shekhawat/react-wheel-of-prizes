@@ -130,7 +130,7 @@ const WheelComponent = ({
     ctx.translate(centerX, centerY)
     ctx.rotate((lastAngle + angle) / 2)
     ctx.fillStyle = contrastColor
-    ctx.font = 'bold 1em ' + fontFamily
+    ctx.font = 'bold .7em ' + fontFamily
     ctx.fillText(value.substr(0, 21), size / 2 + 20, 0)
     ctx.restore()
   }
@@ -155,7 +155,11 @@ const WheelComponent = ({
     ctx.beginPath()
     ctx.arc(centerX, centerY, 50, 0, PI2, false)
     ctx.closePath()
-    ctx.fillStyle = primaryColor
+    var gradineColor = ctx.createLinearGradient(centerX-20, centerY-20, centerX+20,centerY+20)
+     gradineColor.addColorStop(0, '#bf742e');
+     gradineColor.addColorStop(.5, '#e2d329');
+     gradineColor.addColorStop(1, '#f4c907');
+    ctx.fillStyle = gradineColor
     ctx.lineWidth = 10
     ctx.strokeStyle = contrastColor
     ctx.fill()
@@ -171,13 +175,14 @@ const WheelComponent = ({
     ctx.closePath()
 
     ctx.lineWidth = 10
-    ctx.strokeStyle = primaryColor
+    ctx.strokeStyle = gradineColor
     ctx.stroke()
   }
 
   const drawNeedle = () => {
     const ctx = canvasContext
     ctx.lineWidth = 1
+    
     ctx.strokeStyle = contrastColor
     ctx.fileStyle = contrastColor
     ctx.beginPath()
